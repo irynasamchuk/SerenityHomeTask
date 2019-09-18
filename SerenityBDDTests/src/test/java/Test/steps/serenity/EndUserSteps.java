@@ -1,62 +1,43 @@
 package Test.steps.serenity;
 
-import Test.pages.DictionaryPage;
 import Test.pages.GoogleTranslatePage;
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
+import org.junit.Assert;
 
 public class EndUserSteps {
 
-    DictionaryPage dictionaryPage;
     GoogleTranslatePage googleTranslatePage;
 
     @Step
-    public void enters(String keyword) {
-        dictionaryPage.enter_keywords(keyword);
-    }
-
-    @Step
-    public void starts_search() {
-        dictionaryPage.lookup_terms();
-    }
-
-    @Step
-    public void should_see_definition(String definition) {
-        assertThat(dictionaryPage.getDefinitions(), hasItem(containsString(definition)));
-    }
-
-    @Step
-    public void is_the_home_page() {
-        dictionaryPage.open();
-    }
-
-    @Step
-    public void looks_for(String term) {
-        enters(term);
-        starts_search();
-    }
-
-    @Step
-    public void isTheGoogleTranslatePage(){
+    public void isOnTheGoogleTranslatePage() {
         googleTranslatePage.open();
     }
 
     @Step
-    public void userSelectLanguage(){
-        googleTranslatePage.clickOnTheEnglishButton();
+    public void selectLanguageForTranslation(String languageFrom, String languageTo) {
+        googleTranslatePage.selectLanguages(languageFrom, languageTo);
     }
 
     @Step
-    public void userTranslateTheWord(String word){
+    public void translateTheWord(String word) {
         googleTranslatePage.enterText(word);
     }
 
     @Step
-    public void userCheckTheTranslation(String wordTranslated){
-        googleTranslatePage.checkTranslation(wordTranslated);
+    public void checkTheTranslationOfTheWord(String wordTranslated) {
+        String actualTranslation = googleTranslatePage.getTranslation();
+        Assert.assertEquals(wordTranslated, actualTranslation);
+    }
+
+    @Step
+    public void checkNumberOfCharacters(int lengs) {
+        int actualLengs = googleTranslatePage.getNumberOfSymbols();
+        Assert.assertEquals(lengs, actualLengs);
+    }
+
+    @Step
+    public void shouldSeeDefinition(String definition) {
+        String actualDefinition = googleTranslatePage.getWordDefinition();
+        Assert.assertEquals(definition, actualDefinition);
     }
 }

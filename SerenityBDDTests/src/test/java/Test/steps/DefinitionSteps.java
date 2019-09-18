@@ -12,39 +12,33 @@ public class DefinitionSteps {
     @Steps
     EndUserSteps endUser;
 
-    @Given("the user is on the Wikionary home page")
-    public void givenTheUserIsOnTheWikionaryHomePage() {
-        endUser.is_the_home_page();
-    }
-
-    @When("the user looks up the definition of the word '$word'")
-    public void whenTheUserLooksUpTheDefinitionOf(String word) {
-        endUser.looks_for(word);
-    }
-
-    @Then("they should see the definition '$definition'")
-    public void thenTheyShouldSeeADefinitionContainingTheWords(String definition) {
-        endUser.should_see_definition(definition);
-    }
-
     @Given("the user is on the google translate page")
-    public void theUserIsOnTheGoogleTranslatePage(){
-        endUser.isTheGoogleTranslatePage();
+    public void theUserIsOnTheGoogleTranslatePage() {
+        endUser.isOnTheGoogleTranslatePage();
     }
 
-    @Given("selected languages from 'английский' to 'украинский'")
-    public void selectedLanguagesFromEnglishToUkraine(){
-        endUser.userSelectLanguage();
+    @Given("selected languages from '$languageFrom' to '$languageTo'")
+    public void selectedLanguagesToTranslate(String languageFrom, String languageTo) {
+        endUser.selectLanguageForTranslation(languageFrom, languageTo);
     }
 
     @When("the user looks up the translation of the word '$word'")
-    public void theUserLooksTheTranslationOfTheWord(String word){
-        endUser.userTranslateTheWord(word);
+    public void theUserLooksTheTranslationOfTheWord(String word) {
+        endUser.translateTheWord(word);
     }
 
     @Then("they should see the translation '$wordTranslated'")
-    public void theyShouldSeeTheTranslation(String wordTranslated){
-        endUser.userCheckTheTranslation(wordTranslated);
+    public void theyShouldSeeTheTranslation(String wordTranslated) {
+        endUser.checkTheTranslationOfTheWord(wordTranslated);
     }
 
+    @Then("number of characters must be '$number'")
+    public void numberOfCharactersMustBe(int number) {
+        endUser.checkNumberOfCharacters(number);
+    }
+
+    @Then("they should see the definition2 '$definition'")
+    public void theyShouldSeeTheDefinition(String definition) {
+        endUser.shouldSeeDefinition(definition);
+    }
 }
