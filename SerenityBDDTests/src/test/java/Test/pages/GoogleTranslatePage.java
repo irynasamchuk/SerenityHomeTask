@@ -8,9 +8,6 @@ import org.openqa.selenium.support.FindBy;
 
 @DefaultUrl("https://translate.google.com/?hl=ru")
 public class GoogleTranslatePage extends PageObject {
-    @FindBy(xpath = "//*[@id=\"sugg-item-en\"]")
-    WebElementFacade englishButton;
-
     @FindBy(xpath = "//*[@id=\"source\"]")
     WebElementFacade textArea;
 
