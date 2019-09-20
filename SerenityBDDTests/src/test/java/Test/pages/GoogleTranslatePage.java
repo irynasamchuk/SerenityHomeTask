@@ -9,25 +9,25 @@ import org.openqa.selenium.support.FindBy;
 @DefaultUrl("https://translate.google.com/?hl=ru")
 public class GoogleTranslatePage extends PageObject {
     @FindBy(xpath = "//*[@id=\"source\"]")
-    WebElementFacade textArea;
+    private WebElementFacade textArea;
 
-    @FindBy(className = "result-shield-container")
-    WebElementFacade resultTranslation;
+    @FindBy(xpath = "//span[contains(@class,'tlid-translation')]")
+    private WebElementFacade resultTranslation;
 
     @FindBy(xpath = "(//div[@class='gt-def-row'])[2]")
-    WebElementFacade definition;
+    private WebElementFacade definition;
 
     @FindBy(xpath = "//div[@class='sl-more tlid-open-source-language-list']")
-    WebElementFacade languagesFromMenu;
+    private WebElementFacade languagesFromMenu;
 
     @FindBy(xpath = "//div[@class='tl-more tlid-open-target-language-list']")
-    WebElementFacade languagesToMenu;
+    private WebElementFacade languagesToMenu;
 
     @FindBy(xpath = "//input[@id='sl_list-search-box']")
-    WebElementFacade searchLanguageFrom;
+    private WebElementFacade searchLanguageFrom;
 
     @FindBy(xpath = "//input[@id='tl_list-search-box']")
-    WebElementFacade searchLanguageTo;
+    private WebElementFacade searchLanguageTo;
 
     public void selectLanguages(String languageFrom, String languageTo) {
         languagesFromMenu.click();
